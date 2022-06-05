@@ -1,0 +1,13 @@
+version: '3.7'
+
+services:
+  {{ .AppName }}-svr:
+    container_name: {{ .AppName }}-app
+    build:
+      context: .
+      dockerfile: build.dockerfile
+    volumes:
+      - './app.ini:/app/conf/app.ini'
+    entrypoint: go run main.go
+    ports:
+      - 3000:3000

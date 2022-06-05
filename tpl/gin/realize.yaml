@@ -1,0 +1,31 @@
+
+settings:
+  legacy:
+    force: false
+    interval: 0s
+schema:
+- name: {{ .AppName }}
+  env:
+    GOTRACEBACK:crash
+  path: .
+  args:
+  - start
+  - -config=app.ini
+  commands:
+    run:
+      status: true
+      args:
+      - start
+  watcher:
+    extensions:
+    - go
+    - ini
+    paths:
+    - /
+    - ../proto
+    - ../lib
+    ignored_paths:
+    - .git
+    - .realize
+    - vendor
+    - web
