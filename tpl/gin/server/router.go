@@ -2,6 +2,7 @@ package server
 
 import (
 	h "{{ .AppName }}/handler"
+	_ "{{ .AppName }}/docs"
 	"{{ .AppName }}/conf"
 	"github.com/gin-contrib/static"
 	"github.com/gin-gonic/gin"

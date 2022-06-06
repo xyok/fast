@@ -22,37 +22,6 @@ var (
 	res embed.FS
 )
 
-func init() {
-	app = &cli.App{
-		Name:    NAME,
-		Usage:   USAGE,
-		Version: VERSION,
-		Action:  action,
-		Flags: []cli.Flag{
-			&cli.StringFlag{
-				Name:     "name",
-				Aliases:  []string{"n"},
-				Usage:    "project name",
-				Required: true,
-			},
-			&cli.StringFlag{
-				Name:  "tpl",
-				Usage: "project tamplate tpl/[*]",
-				Value: "gin",
-			},
-			&cli.StringFlag{
-				Name:    "output",
-				Aliases: []string{"o"},
-				Usage:   "generate out",
-			},
-			&cli.StringFlag{
-				Name:  "remote",
-				Usage: "git remote",
-			},
-		},
-	}
-}
-
 func action(c *cli.Context) error {
 	return gen.Execute(
 		c.String("name"),
@@ -63,7 +32,46 @@ func action(c *cli.Context) error {
 	)
 }
 
+var GenProjectCommand = &cli.Command{
+	Name:    "gen",
+	Aliases: []string{"g"},
+	Usage:   "generate project",
+	Action:  action,
+	Flags: []cli.Flag{
+		&cli.StringFlag{
+			Name:     "name",
+			Aliases:  []string{"n"},
+			Usage:    "project name",
+			Required: true,
+		},
+		&cli.StringFlag{
+			Name:  "tpl",
+			Usage: "project tamplate tpl/[*]",
+			Value: "gin",
+		},
+		&cli.StringFlag{
+			Name:    "output",
+			Aliases: []string{"o"},
+			Usage:   "generate out",
+		},
+		&cli.StringFlag{
+			Name:  "remote",
+			Usage: "git remote",
+		},
+	},
+}
+
 func main() {
+	app := cli.NewApp()
+	app.Name = NAME
+	app.Usage = USAGE
+	app.Version = VERSION
+	app.EnableBashCompletion = true
+
+	app.Commands = []*cli.Command{
+		GenProjectCommand,
+	}
+
 	if err := app.Run(os.Args); err != nil {
 		log.Fatal(err)
 	}

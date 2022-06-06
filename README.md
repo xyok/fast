@@ -1,11 +1,11 @@
 # fast cli
 
 
-> 从模版生成Go 项目代码
+> 从模版生成Go 代码
 >
 
 
-### 框架
+### 项目框架
 
 - [x] gin sample
 - [ ] fiber
@@ -40,5 +40,5 @@ GLOBAL OPTIONS:
 ### 创建工程
 
 ```bash
-go run main.go --name apisvr --frame gin --output /home/user/workspace
+go run main.go gen --name apisvr --frame gin --output /home/user/workspace
 ```
